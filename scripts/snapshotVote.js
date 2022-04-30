@@ -1,20 +1,21 @@
 require('dotenv').config();
+const path = require("path");
+const Web3 = require('web3')
 
 // define paths
 INFURA_KEY = process.env.WEB3_INFURA_PROJECT_ID;
-const wallets_path = './wallets.txt'
-const to_vote_path = './to_vote.json'
-const choices_path = './choices.json'
+const walletsPath = path.join(__dirname, '..', 'src', 'wallets.txt')
+const toVotePath = path.join(__dirname, '..', 'src', 'to_vote.json')
+const choicesPath = path.join(__dirname, '..', 'src', 'choices.json')
 
 // initiate web3 connection
-const Web3 = require('web3')
 const rpcURL = "https://mainnet.infura.io/" + INFURA_KEY
 const web3 = new Web3(rpcURL)
 
 // test wallet
-const address = ""
-//console.log(address)
+const address = //infer from file under walletsPath
 
+//console.log(address)
 
 //console.log(balance)
 

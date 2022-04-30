@@ -1,7 +1,10 @@
 # data files
 *.txt
 *.json
+*.csv
 
+# irrelevant files
+.DS_Store
 
 # Logs
 logs
