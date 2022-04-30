@@ -1,34 +1,28 @@
-require('dotenv').config();
 const path = require("path");
-const Web3 = require('web3')
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
+const Web3 = require('web3');
+const fs = require("fs");
+
+// load environment variables
+const INFURA_KEY = process.env.WEB3_INFURA_PROJECT_ID;
+const ENCR_PW = process.env.ENCR_PW;
 
 // define paths
-INFURA_KEY = process.env.WEB3_INFURA_PROJECT_ID;
-const walletsPath = path.join(__dirname, '..', 'src', 'wallets.txt')
-const toVotePath = path.join(__dirname, '..', 'src', 'to_vote.json')
-const choicesPath = path.join(__dirname, '..', 'src', 'choices.json')
+const walletsPath = path.join(__dirname, '..', 'src', 'wallets.txt');
+const toVotePath = path.join(__dirname, '..', 'src', 'to_vote.json');
+const choicesPath = path.join(__dirname, '..', 'src', 'choices.json');
+const encrPkPath = path.join(__dirname, '..', '..', 'test_wallet_encrPK.json');
 
 // initiate web3 connection
-const rpcURL = "https://mainnet.infura.io/" + INFURA_KEY
-const web3 = new Web3(rpcURL)
+const rpcURL = "https://mainnet.infura.io/" + INFURA_KEY;
+const web3 = new Web3(rpcURL);
 
-// test wallet
-const address = //infer from file under walletsPath
+// takes path to encr account json file, returns account object
+function getAccount (pathToEncrPk, encrPw) {
+    let contents = fs.readFileSync(pathToEncrPk);
+    let parsed = (JSON.parse(contents));
+    return web3.eth.accounts.decrypt(parsed, encrPw);
+}
 
-//console.log(address)
-
-//console.log(balance)
-
-// implement keychain  handling
-
-// handle pk with test wallet
-
-// import snapshot.js
-
-// read to_vote.js
-
-// read choices.js
-
-// define voting with one wallet
-
-// iterate over all wallets in to_vote: call voting function
+// instantiate account object
+const account = getAccount(encrPkPath, ENCR_PW);
