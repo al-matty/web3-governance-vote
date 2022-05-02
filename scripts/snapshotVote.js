@@ -26,3 +26,14 @@ function getAccount (pathToEncrPk, encrPw) {
 
 // instantiate account object
 const account = getAccount(encrPkPath, ENCR_PW);
+
+/*
+TODO: implement vonting function (proposal, choice).
+       -> returns set of proposals voted on in this session
+
+TODO: implement wrapper function calling voting function for multiple wallets
+       -> returns set of proposals voted on in this session
+
+TODO: implement function refreshing already_voted_on_json
+
+*/
