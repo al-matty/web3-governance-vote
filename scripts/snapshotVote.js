@@ -49,18 +49,26 @@ const getVoteDict = (proposal) => {
 };
 
 // vote with each wallet as determined in choices.json
+const vote = async(signer, wallet, voteDict) => {
+  try {
+    await client.vote(signer, wallet, voteDict);
+    console.log(`=== SUCCESS: Voted for ${voteDict['space']} with ${wallet}` );
+
+  } catch (error) {
+      console.log(`=== FAILURE: Have not been able to vote for ${voteDict['space']}`);
+      console.log('\twith', wallet);
+    };
+};
+
 const choices = require(choicesPath);
 
 for (let wallet_proposals of Object.entries(choices)) {
-  wallet = wallet_proposals[0];
-  proposals = wallet_proposals[1];
+  let _wallet = wallet_proposals[0];
+  let proposals = wallet_proposals[1];
 
   for (let prop of Object.values(proposals)) {
-    voteDict = getVoteDict(prop);
-    let receipt = await client.vote(signer, wallet, voteDict);
-    console.log(receipt);
+    let voteDict = getVoteDict(prop);
+    vote(signer, _wallet, voteDict)
+//  let receipt = await client.vote(signer, _wallet, voteDict);
   };
 };
-
-
-console.log('Groovey!')
