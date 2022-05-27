@@ -68,7 +68,9 @@ for (let wallet_proposals of Object.entries(choices)) {
 
   for (let prop of Object.values(proposals)) {
     let voteDict = getVoteDict(prop);
-    vote(signer, _wallet, voteDict)
-//  let receipt = await client.vote(signer, _wallet, voteDict);
+    let delay = Math.floor(Math.random() * 3500) + 500
+    setTimeout(function(){
+        vote(signer, _wallet, voteDict);
+    }, delay);
   };
 };
