@@ -17,6 +17,7 @@ import snapshot from '@snapshot-labs/snapshot.js';
 const choicesPath = path.join(__dirname, '..', '..', 'snapshot-query', 'choices.json');
 const encrPkPath = path.join(__dirname, '..', '..', 'test_wallet_encrPK.json');
 const INFURA_KEY = process.env.WEB3_INFURA_PROJECT_ID;
+const ENCR_PW_MM = process.env.ENCR_PW_MM;
 const ENCR_PW = process.env.ENCR_PW;
 
 // decrypt ETH wallet
@@ -27,7 +28,7 @@ function getAccount (pathToEncrPk, encrPw) {
     let parsed = (JSON.parse(contents));
     return web3.eth.accounts.decrypt(parsed, encrPw);
 };
-const account = getAccount(encrPkPath, ENCR_PW);
+const account = getAccount(encrPkPath, ENCR_PW_MM);
 
 // instantiate signer with wallet keys
 const hub = 'https://hub.snapshot.org'; // or https://testnet.snapshot.org for testnet
