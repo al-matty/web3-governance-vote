@@ -19,6 +19,10 @@ const encrPkPath = path.join(__dirname, '..', '..', 'test_wallet_encrPK.json');
 const INFURA_KEY = process.env.WEB3_INFURA_PROJECT_ID;
 const ENCR_PW_MM = process.env.ENCR_PW_MM;
 const ENCR_PW = process.env.ENCR_PW;
+const wallets = require('./wllts.json')
+
+
+
 
 // decrypt ETH wallet
 const rpcURL = "https://mainnet.infura.io/" + INFURA_KEY;
@@ -28,7 +32,7 @@ function getAccount (pathToEncrPk, encrPw) {
     let parsed = (JSON.parse(contents));
     return web3.eth.accounts.decrypt(parsed, encrPw);
 };
-const account = getAccount(encrPkPath, ENCR_PW_MM);
+const account = getAccount(encrPkPath, ENCR_PW_MM.slice(5,-5));
 
 // instantiate signer with wallet keys
 const hub = 'https://hub.snapshot.org'; // or https://testnet.snapshot.org for testnet
