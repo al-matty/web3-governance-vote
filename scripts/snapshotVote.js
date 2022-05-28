@@ -19,9 +19,8 @@ const encrPkPath = path.join(__dirname, '..', '..', 'test_wallet_encrPK.json');
 const INFURA_KEY = process.env.WEB3_INFURA_PROJECT_ID;
 const ENCR_PW_MM = process.env.ENCR_PW_MM;
 const ENCR_PW = process.env.ENCR_PW;
-const wallets = require('./wllts.json')
-
-
+const choices = require(choicesPath);
+const wallets = require('../wllts.json')
 
 
 // decrypt ETH wallet
@@ -32,15 +31,20 @@ function getAccount (pathToEncrPk, encrPw) {
     let parsed = (JSON.parse(contents));
     return web3.eth.accounts.decrypt(parsed, encrPw);
 };
-const account = getAccount(encrPkPath, ENCR_PW_MM.slice(5,-5));
+
 
 // instantiate signer with wallet keys
 const hub = 'https://hub.snapshot.org'; // or https://testnet.snapshot.org for testnet
 const client = new snapshot.Client712(hub);
 const INFURA_SECRET = process.env.WEB3_INFURA_PROJECT_SECRET;
 const provider = new ethers.providers.InfuraProvider("homestead", INFURA_KEY)
-const wallet = new ethers.Wallet(account.privateKey, provider)
-var signer = wallet.connect(provider)
+
+const getSigner = (account, provider) => {
+  let wallet = new ethers.Wallet(account.privateKey, provider);
+  let signer = wallet.connect(provider);
+  return signer;
+};
+
 
 // convert voting data to right format
 const getVoteDict = (proposal) => {
@@ -53,7 +57,7 @@ const getVoteDict = (proposal) => {
   };
 };
 
-// vote with each wallet as determined in choices.json
+
 const vote = async(signer, wallet, voteDict) => {
   try {
     await client.vote(signer, wallet, voteDict);
@@ -62,14 +66,16 @@ const vote = async(signer, wallet, voteDict) => {
   } catch (error) {
       console.log(`=== FAILURE: Have not been able to vote for ${voteDict['space']}`);
       console.log('\twith', wallet);
+      console.log('Error:', error)
     };
 };
 
-const choices = require(choicesPath);
-
+// vote with each wallet as determined in choices.json
 for (let wallet_proposals of Object.entries(choices)) {
   let _wallet = wallet_proposals[0];
   let proposals = wallet_proposals[1];
+  let account = getAccount(wallets[_wallet], ENCR_PW_MM.slice(5,-5));
+  let signer = getSigner(account, provider)
 
   for (let prop of Object.values(proposals)) {
     let voteDict = getVoteDict(prop);
