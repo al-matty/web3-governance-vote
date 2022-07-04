@@ -13,6 +13,8 @@ const fs = require("fs");
 const { ethers } = require("ethers");
 import snapshot from '@snapshot-labs/snapshot.js';
 
+console.group('LOGGING ON')
+
 // paths
 const choicesPath = path.join(__dirname, '..', '..', 'snapshot-query', 'choices.json');
 const encrPkPath = path.join(__dirname, '..', '..', 'test_wallet_encrPK.json');
