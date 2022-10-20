@@ -4,3 +4,7 @@ Script to do some automated voting strategies on snapshot.page. Voting recipes c
 ### Usage
 ```
 node snapshotVote.js
+```
+
+### License
+MIT-licensed
