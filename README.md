@@ -1,5 +1,8 @@
 # snapshot-vote
 
+![GitHub](https://img.shields.io/github/license/al-matty/snapshot-vote)
+![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/al-matty/snapshot-vote)
+
 Script to automate or aggregate voting on proposals on the web3 governance platform [snapshot.org](https://snapshot.org/#/), i.e. to vote with all your Ethereum addresses simultaneously. Alternatively, automated voting recipes can be created based on data obtained from previously cast votes. See [snapshot-query](https://github.com/al-matty/snapshot-query) to query for active proposals and generate 'choices.json' programmatically, or alternatively write your own 'choices.json' file for use as voting instructions for the script.
 
 ### Usage
