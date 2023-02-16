@@ -17,10 +17,11 @@ console.group('LOGGING ON')
 
 // Define paths
 const choicesPath = path.join(__dirname, '..', 'snapshot-query', 'choices.json');
+const walletsPath = path.join(__dirname, 'wllts.json');
 const INFURA_KEY = process.env.WEB3_INFURA_PROJECT_ID;
 const ENCR_PW = process.env.ENCR_PW;
-const choices = require(choicesPath);
-const wallets = require('wllts.json')
+const choices = JSON.parse(fs.readFileSync(choicesPath));
+const wallets = JSON.parse(fs.readFileSync(walletsPath));
 
 
 // Define function to decrypt ETH wallet
