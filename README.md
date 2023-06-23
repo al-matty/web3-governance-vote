@@ -1,4 +1,4 @@
-# snapshot-vote
+# web3-governance-vote
 
 ![GitHub](https://img.shields.io/github/license/al-matty/snapshot-vote)
 ![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/al-matty/snapshot-vote)
